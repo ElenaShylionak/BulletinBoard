@@ -1,37 +1,37 @@
 package com.example.buysell.services;
 
+
 import com.example.buysell.models.Product;
+import com.example.buysell.repositories.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service //это просто бин, компонент
+@Slf4j //логи
+@RequiredArgsConstructor
 public class ProductService {
-    private List<Product> products = new ArrayList<>();
-    private long ID = 0;
+    private final ProductRepository productRepository; // можно с аннотацией @Autowired , можно просто  private final
 
-    {
-        products.add(new Product(++ID, "PlayStation 5", "Simple description", 67000, "Krasnoyarsk", "tomas"));
-        products.add(new Product(++ID, "Iphone 8", "Simple description", 24000, "Moscow", "artmcoder"));
-        products.add(new Product(++ID, "Iphone 10", "Simple description", 28000, "Moscow", "artmcoder"));
+    public List<Product> listProducts(String title) {
+        if (title != null) return productRepository.findByTitle(title); //проверка
+        return productRepository.findAll();
     }
 
-    public List<Product> listProducts() { return products; }
-
     public void saveProduct(Product product) {
-        product.setId(++ID);
-        products.add(product);
+        log.info("Saving new {}", product); //добавим логи, у нас есть метод toString - он вставит сюда строку {}
+        productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {
-        products.removeIf(product -> product.getId().equals(id));
+        productRepository.deleteById(id); //встроенный метод deleteById
     }
 
     public Product getProductById(Long id) {
-        for (Product product : products) {
-            if (product.getId().equals(id)) return product;
-        }
-        return null;
+        return productRepository.findById(id).orElse(null); //встроенный метод dfindById, если товар не найден вернуть null
     }
 }
