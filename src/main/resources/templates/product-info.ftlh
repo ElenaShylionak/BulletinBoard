@@ -4,8 +4,8 @@
     <title>BUYSELL</title>
 </head>
 <body>
-<h1>Доска объявляний Беларусь</h1><hr>
-<h4>Подробная информация</h4>
+<h1>BUYSELL</h1><hr>
+<h4>Подробная информация о товаре</h4>
 <#list images as img>
     <img src="/images/${img.id}" height="60px"/><br><br>
 </#list>
@@ -16,6 +16,7 @@
 <b>Автор: </b>${product.author}<br>
 <hr>
 <form action="/product/delete/${product.id}" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Удалить товар"/>
 </form>
 </body>

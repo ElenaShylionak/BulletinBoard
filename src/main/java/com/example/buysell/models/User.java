@@ -1,11 +1,11 @@
 package com.example.buysell.models;
 
 import com.example.buysell.models.enums.Role;
-import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,29 +19,27 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "email", unique = true) //уникальность unique = true
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "numberPhone", unique = true)
     private String numberPhone;
     @Column(name = "name")
     private String name;
-    @Column(name = "active") //нужно, если нужно подтвержение по почте, пока не подтвердит аккаунт будет равен false
+    @Column(name = "active")
     private boolean active;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) //cascade = CascadeType.ALL - чтобы удалять товар, когда удаляем пользователя
-    @JoinColumn(name = "image_id") //аватар
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "image_id")
     private Image avatar;
-    @Column(name = "password", length = 1000) //длина пароля
+    @Column(name = "password", length = 1000)
     private String password;
-
-    //создается отдельная таблица - в ней храниться id и роль
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER) //загрузка ролей fetch = FetchType.EAGER
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING) // преоьбразуем Enum в тип STRING
-    private Set<Role> roles = new HashSet<>(); //список ролей
-    private LocalDateTime dateOfCreated; //дата создания пользователя
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
+    private LocalDateTime dateOfCreated;
 
-    @PrePersist   //инициализация даты создания пользователя
+    @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
     }
@@ -52,7 +50,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() { // можно по имени, можно по почте . у меня  Username - return email
+    public String getUsername() {
         return email;
     }
 
@@ -72,7 +70,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() { //тип активности
+    public boolean isEnabled() {
         return active;
     }
 }

@@ -1,24 +1,20 @@
 package com.example.buysell.models;
 
-
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//модель которая будет отображаться в базе данных
 @Entity
 @Table(name = "products")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Product {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         private Long id;
         @Column(name = "title")
@@ -31,12 +27,11 @@ public class Product {
         private String city;
         @Column(name = "author")
         private String author;
-
-        @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, //один продукт ко многим фото. ALL - при удалении товара - должны удалиться все фото
-                mappedBy = "product")  //ссылаемся, что товар связанный с фото будет связан и записан в таблице images
+        @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+                mappedBy = "product")
         private List<Image> images = new ArrayList<>();
         private Long previewImageId;
-        private LocalDateTime dateOfCreated; // знать время когда определенный товар был создан
+        private LocalDateTime dateOfCreated;
 
         @PrePersist
         private void init() {
@@ -48,4 +43,3 @@ public class Product {
                 images.add(image);
         }
 }
-
