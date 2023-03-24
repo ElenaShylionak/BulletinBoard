@@ -4,7 +4,7 @@ import com.example.buysell.models.enums.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -36,7 +36,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user") //один пользователь ко многим товарам. При удалени и пол-ля удадяем все связанные с ним сущности
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Product> products = new ArrayList<>();
     private LocalDateTime dateOfCreated;
 
@@ -47,6 +47,10 @@ public class User implements UserDetails {
     }
 
     // security
+
+    public boolean isAdmin() {
+        return roles.contains(Role.ROLE_ADMIN);
+    } //проверяем содержит его роль админ
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
