@@ -12,9 +12,11 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         @Column(name = "id")
         private Long id;
         @Column(name = "title")
@@ -25,18 +27,20 @@ public class Product {
         private int price;
         @Column(name = "city")
         private String city;
-        @Column(name = "author")
-        private String author;
         @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
                 mappedBy = "product")
         private List<Image> images = new ArrayList<>();
         private Long previewImageId;
+        @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY) //много товаров у одного пользотеля
+        @JoinColumn
+        private User user;
         private LocalDateTime dateOfCreated;
 
         @PrePersist
         private void init() {
                 dateOfCreated = LocalDateTime.now();
         }
+
 
         public void addImageToProduct(Image image) {
                 image.setProduct(this);
