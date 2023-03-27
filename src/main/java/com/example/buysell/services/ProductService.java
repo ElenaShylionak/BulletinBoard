@@ -27,7 +27,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Principal principal, Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException { //principal - так называемя обветка
+    public void saveProduct(Principal principal, Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
         product.setUser(getUserByPrincipal(principal));
         Image image1;
         Image image2;

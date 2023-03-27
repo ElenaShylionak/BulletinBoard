@@ -31,7 +31,7 @@ public class Product {
                 mappedBy = "product")
         private List<Image> images = new ArrayList<>();
         private Long previewImageId;
-        @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY) //много товаров у одного пользотеля
+        @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
         @JoinColumn
         private User user;
         private LocalDateTime dateOfCreated;

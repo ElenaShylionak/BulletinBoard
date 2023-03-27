@@ -37,7 +37,7 @@ public class ProductController {
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
                                 @RequestParam("file3") MultipartFile file3, Product product, Principal principal) throws IOException {
-        productService.saveProduct(principal, product, file1, file2, file3); //таким образом мы сохрпним товар в базу данных
+        productService.saveProduct(principal, product, file1, file2, file3);
         return "redirect:/";
     }
 
