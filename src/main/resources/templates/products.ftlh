@@ -2,9 +2,22 @@
 <html>
 <head>
     <title>BUYSELL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+          crossorigin="anonymous">
 </head>
-<body>
-<h1>BUYSELL</h1>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+           Доска объявлений "Купилка" по Беларуси
+    </a>
+</nav>
+
+<div class="container mt-4">
 <hr>
 <#if user.email??>
     <h3>Имя пользователя: <i>${user.name}</i></h3>
@@ -19,11 +32,17 @@
     <a href="/login">Войти</a></h1>
 </#if>
 <hr>
-<h4>Товары со всей России</h4>
-<form action="/" method="get">
+
+<div>
+    <h4>Новые объявления каждый день!</h4>
+</div>
+    <hr>
+    <form action="/" method="get">
     Поиск по названию объявления: <input type="text" name="title">
     <input type="submit" value="Поиск"/>
 </form>
+    <hr>
+
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price} руб. | <a href="/product/${product.id}">Подробнее...</a></p>
@@ -44,7 +63,8 @@
         Третья фотография: <input type="file" name="file3"/><br><br>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Добавить товар"/>
-    </form>
+
 </#if>
+</div>
 </body>
 </html>

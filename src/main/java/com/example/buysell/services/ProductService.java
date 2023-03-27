@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,7 +65,7 @@ public class ProductService {
         return image;
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteProduct(User userByPrincipal, Long id) {
         productRepository.deleteById(id);
     }
 
