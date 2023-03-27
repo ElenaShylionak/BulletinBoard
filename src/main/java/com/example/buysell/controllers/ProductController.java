@@ -56,6 +56,6 @@ public class ProductController {
         User user = productService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         model.addAttribute("products", user.getProducts());
-        return "my-products";
+        return "products";
     }
 }
