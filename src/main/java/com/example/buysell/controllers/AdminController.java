@@ -26,7 +26,7 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/admin/user/ban/{id}")
+    @PostMapping("/admin/user/ban/{id}") // метод блокировки
     public String userBan(@PathVariable("id") Long id) {
         userService.banUser(id);
         return "redirect:/admin";

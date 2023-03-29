@@ -1,4 +1,4 @@
-<!--<!DOCTYPE html>
+<!--<!DOCTYPE html> <НЕ ГОТОВО пока>
 <html>
 <head>
     <title>BUYSELL</title>

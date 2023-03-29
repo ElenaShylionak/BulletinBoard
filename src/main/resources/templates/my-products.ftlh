@@ -1,7 +1,7 @@
-<!--<!DOCTYPE html>
+<!--<!DOCTYPE html> НЕ ГОТОВО ЕЩЕ
 <html>
 <head>
-    <title>BUYSELL</title>
+    <title>BulletinBoard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -47,10 +47,8 @@
             <label for="searchCity">Город</label>
             <select id="searchCity" required name="city" class="form-control">
                 <option value="">Город не выбран</option>
+                <option value="Минск">Москва</option>
 
-                <option value="Москва">Москва</option>
-                <option value="Красноярск">Красноярск</option>
-                <option value="Казань">Казань</option>
 
             </select>
         </div>

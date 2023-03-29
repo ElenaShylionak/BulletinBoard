@@ -21,13 +21,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean createUser(User user) {
+    public boolean createUser(User user) { //создать пользователя
         String email = user.getEmail();
-        if (userRepository.findByEmail(email) != null) return false;
+        if (userRepository.findByEmail(email) != null) return false; // проверка
         user.setActive(true);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
-        log.info("Saving new User with email: {}", email);
+        user.setPassword(passwordEncoder.encode(user.getPassword())); //пароль
+        user.getRoles().add(Role.ROLE_USER); //роль
+        log.info("Saving new User with email: {}", email); //логи
         userRepository.save(user);
         return true;
     }
@@ -36,12 +36,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void banUser(Long id) {
+    public void banUser(Long id) { //блокировка
         User user = userRepository.findById(id).orElse(null);
-        if (user != null) {
+        if (user != null) { //проверка
             if (user.isActive()) {
                 user.setActive(false);
-                log.info("Ban user with id = {}; email: {}", user.getId(), user.getEmail());
+                log.info("Ban user with id = {}; email: {}", user.getId(), user.getEmail()); //логи
             } else {
                 user.setActive(true);
                 log.info("Unban user with id = {}; email: {}", user.getId(), user.getEmail());

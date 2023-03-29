@@ -28,12 +28,12 @@ public class ProductService {
 
     public void saveProduct(Principal principal, Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
         product.setUser(getUserByPrincipal(principal));
-        Image image1;
+        Image image1; //можем принять 3 картинки
         Image image2;
         Image image3;
-        if (file1.getSize() != 0) {
+        if (file1.getSize() != 0) { //проверяем не равен ли размер картинки нулю
             image1 = toImageEntity(file1);
-            image1.setPreviewImage(true);
+            image1.setPreviewImage(true); //первое фото - назначаем превью
             product.addImageToProduct(image1);
         }
         if (file2.getSize() != 0) {
@@ -44,7 +44,7 @@ public class ProductService {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail());
+        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail()); //пишем логи
         Product productFromDb = productRepository.save(product);
         //productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
@@ -67,9 +67,9 @@ public class ProductService {
 
     public void deleteProduct(User userByPrincipal, Long id) {
         productRepository.deleteById(id);
-    }
+    } //удаление
 
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
-    }
+    } //получить по id
 }

@@ -1,4 +1,4 @@
-package com.example.buysell.controllers.configurations;
+package com.example.buysell.configurations;
 
 import com.example.buysell.services.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;

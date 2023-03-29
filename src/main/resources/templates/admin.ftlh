@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BUYSELL</title>
+    <title>BulletinBoard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -14,7 +14,6 @@
 
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <img src="/static.images/money-bag-svgrepo-com.svg" class="d-inline-block align-top" alt="">
         Доска объявлений "Купилка" по Беларуси
     </a>
 </nav>
